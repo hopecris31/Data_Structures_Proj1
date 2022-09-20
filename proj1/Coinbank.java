@@ -93,7 +93,7 @@ public class Coinbank {
 	/** 
 	 * insert valid coin into bank.  Returns true if deposit
 	 * successful (i.e. coin was penny, nickel, dime, or quarter).
-	 * Returns false if coin not recognized
+	 * Returns false if coin not recognized (can only insert 1 at a time)
 	 * 
 	 * @param coinType either 1, 5, 10, or 25 to be valid
 	 * @return true if deposit successful, else false
