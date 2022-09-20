@@ -74,7 +74,7 @@ public class CoinbankTest {
 		assertEquals(expected,c.toString());
 	}
 
-	@Test // test of remove
+	@Test // test of remove; removing the exact number of a type of coin that is present (total left of that type is 0)
 	public void testRemove_justEnough()
 	{
 		Coinbank c = makeBank(4,1,3,5);
@@ -83,17 +83,31 @@ public class CoinbankTest {
 		assertEquals(expected,c.toString());
 	}
 	
-	@Test // remove should not do anything if a 3-cent coin is requested
+	@Test // test of remove; remove should not do anything if a 3-cent (invalid) coin is requested.
 	public void testRemove_invalidCoin()
 	{
 		Coinbank c = makeBank(4,1,3,5);
 		assertEquals(0,c.remove(3,1));
 	}
 
-	@Test
+	@Test // test of remove; 5 quarters - 3 should have 3 removed from bank.
 	public void testRemove_enoughCoinsToSpare()
 	{
 		Coinbank c = makeBank(4,1,3,5);
 		assertEquals(3, c.remove(25, 3));
+	}
+
+	@Test // test of insert; inserting a penny into the bank.
+	public void testInsert()
+	{
+		Coinbank c = makeBank(0,0,0,0);
+		assertEquals(true, c.insert(1));
+	}
+
+	@Test // test of insert; inserting an invalid coin type into the bank.
+	public void testInsert_invalidCoin()
+	{
+		Coinbank c = makeBank(0,0,0,0);
+		assertEquals(false, c.insert(4));
 	}
 }

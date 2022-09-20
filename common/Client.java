@@ -1,7 +1,7 @@
 package common;
 import java.util.Random;
 
-import original.Coinbank;
+import proj1.Coinbank;
 
 public class Client {
 

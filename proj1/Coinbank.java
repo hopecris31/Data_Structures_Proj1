@@ -14,10 +14,10 @@ public class Coinbank {
 	public static final int QUARTER_VALUE = 25;
 	
 	// give meaningful names to holder array indices
-	private final int PENNY = 0;
-	private final int NICKEL = 1;
-	private final int DIME = 2;
-	private final int QUARTER = 3;
+	private final int PENNY_INDEX = 0;
+	private final int NICKEL_INDEX = 1;
+	private final int DIME_INDEX = 2;
+	private final int QUARTER_INDEX = 3;
 
 	// how many types of coins does the bank hold?
 	private final int COINTYPES = 4;
@@ -45,16 +45,16 @@ public class Coinbank {
 	 * @param coinType the type of coin, 1, 5, 10, 25 are valid inputs
 	 * @return the index of the coin type in the holder
 	 */
-	private int getCoinIndex(int coinType){// implement this as a switch statement
+	private int getCoinIndex(int coinType){
 		switch (coinType) {
 			case PENNY_VALUE:
-				return PENNY;
+				return PENNY_INDEX;
 			case NICKEL_VALUE:
-				return NICKEL;
+				return NICKEL_INDEX;
 			case DIME_VALUE:
-				return DIME;
+				return DIME_INDEX;
 			case QUARTER_VALUE:
-				return QUARTER;
+				return QUARTER_INDEX;
 			default:
 				return -1;
 		}
@@ -66,22 +66,13 @@ public class Coinbank {
 	 * @param numCoins number of coins
 	 */
 	private void set(int coinType, int numCoins) {
-		if (isBankable(coinType)){
-			switch (coinType) {						//repetitive, see how can extract into helper method
-				case PENNY_VALUE:
-					this.holder[PENNY] = numCoins;
-					break;
-				case NICKEL_VALUE:
-					this.holder[NICKEL] = numCoins;
-					break;
-				case DIME_VALUE:
-					this.holder[DIME] = numCoins;
-					break;
-				default:
-					this.holder[QUARTER] = numCoins;
+		if (isBankable(coinType))
+			switch (coinType) {
+				case PENNY_VALUE: case NICKEL_VALUE:
+				case DIME_VALUE: case QUARTER_VALUE:
+					this.holder[getCoinIndex(coinType)] = numCoins;
 					break;
 			}
-		}
 	}
 	
 	/**
@@ -128,19 +119,14 @@ public class Coinbank {
 	 */
 	public int remove(int coinType, int requestedCoins) {
 		int removedCoins = 0;
-		if (isBankable(coinType) && requestedCoins >= 0){    // move if statement inside switch statement // see if can remove else statement, reduce lines of code
+		if (isBankable(coinType) && requestedCoins >= 0){
 			switch (coinType){
 				case PENNY_VALUE: case NICKEL_VALUE:
 				case DIME_VALUE: case QUARTER_VALUE:
-					removedCoins = findCoinsRemoved(coinType, requestedCoins);
-					return removedCoins;
-				default:
 					return findCoinsRemoved(coinType, requestedCoins);
 			}
 		}
-		else{
-			return removedCoins;
-		}
+		return removedCoins;
 	}
 
 	/**
