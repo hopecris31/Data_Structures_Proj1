@@ -20,7 +20,7 @@ public class Coinbank {
 	private final int QUARTER = 3;
 
 	// how many types of coins does the bank hold?
-	private final int COINTYPES = 4;  //do these local variable suggestions improve functionality/readability?
+	private final int COINTYPES = 4;
 
 	private int[] holder;
 	
@@ -91,10 +91,10 @@ public class Coinbank {
 	 */
 	private boolean isBankable(int coin){  // please ask how this works
 		switch (coin) {
-		case PENNY_VALUE: case NICKEL_VALUE: 
+		case PENNY_VALUE: case NICKEL_VALUE:
 		case DIME_VALUE: case QUARTER_VALUE:
 			return true;
-		default: 
+		default:
 			return false;
 		}
 	}
