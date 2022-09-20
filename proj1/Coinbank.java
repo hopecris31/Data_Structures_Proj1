@@ -37,12 +37,7 @@ public class Coinbank {
 	 * @return number of coins that bank is holding of that type, or -1 if denomination not valid
 	 */
 	public int get(int coinType){
-		if (isBankable(coinType)){
 			return this.holder[getCoinIndex(coinType)];
-		}
-		else{
-			return -1;
-		}
 	}
 
 	/**
@@ -58,8 +53,10 @@ public class Coinbank {
 				return NICKEL;
 			case DIME_VALUE:
 				return DIME;
-			default:
+			case QUARTER_VALUE:
 				return QUARTER;
+			default:
+				return -1;
 		}
 	}
 
@@ -73,12 +70,16 @@ public class Coinbank {
 			switch (coinType) {						//repetitive, see how can extract into helper method
 				case PENNY_VALUE:
 					this.holder[PENNY] = numCoins;
+					break;
 				case NICKEL_VALUE:
 					this.holder[NICKEL] = numCoins;
+					break;
 				case DIME_VALUE:
 					this.holder[DIME] = numCoins;
+					break;
 				default:
 					this.holder[QUARTER] = numCoins;
+					break;
 			}
 		}
 	}
@@ -126,10 +127,34 @@ public class Coinbank {
 	 * @return number of coins that are actually removed
 	 */
 	public int remove(int coinType, int requestedCoins) {
-
+		int removedCoins = 0;
+		if (isBankable(coinType) && requestedCoins >= 0){    // move if statement inside switch statement // see if can remove else statement, reduce lines of code
+			switch (coinType){
+				case PENNY_VALUE: case NICKEL_VALUE:
+				case DIME_VALUE: case QUARTER_VALUE:
+					removedCoins = findCoinsRemoved(coinType, requestedCoins);
+					return removedCoins;
+				default:
+					return findCoinsRemoved(coinType, requestedCoins);
+			}
+		}
+		else{
+			return removedCoins;
+		}
 	}
-	
 
+	/**
+	 * helper, finds and returns the number of coins left after taking them out of holder
+	 * @param coinType the type of coin to be removed
+	 * @param requestedCoins the number of coins to be taken out
+	 * @return the number of coins left after subtraction
+	 */
+	private int findCoinsRemoved (int coinType, int requestedCoins){
+		int coinsWeHave = get(coinType); //the number of coins in the coin's index
+		int coinsLeft = numLeft(requestedCoins, coinsWeHave); //
+		this.holder[getCoinIndex(coinType)] = coinsLeft;
+		return coinsWeHave - coinsLeft;  //returning the removed coins
+	}
 	/**
 	 * returns number of coins remaining after removing the
 	 * requested amount.  Returns zero if requested amount > what we have

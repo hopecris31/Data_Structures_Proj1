@@ -6,12 +6,12 @@ import org.junit.*;
 import org.junit.rules.Timeout;
 import static org.junit.Assert.*;
 
-import original.Coinbank;  //initially import proj1.coinbank;
+import proj1.Coinbank;
 
 public class CoinbankTest {
 	
 	@Rule // a test will fail if it takes longer than 1/10 of a second to run
- 	public Timeout timeout = Timeout.millis(100); 
+ 	public Timeout timeout = Timeout.millis(100);
 
 	/**
 	 * Sets up a bank with the given coins
@@ -88,5 +88,12 @@ public class CoinbankTest {
 	{
 		Coinbank c = makeBank(4,1,3,5);
 		assertEquals(0,c.remove(3,1));
+	}
+
+	@Test
+	public void testRemove_enoughCoinsToSpare()
+	{
+		Coinbank c = makeBank(4,1,3,5);
+		assertEquals(3, c.remove(25, 3));
 	}
 }
