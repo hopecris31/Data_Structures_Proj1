@@ -42,7 +42,6 @@ public class CoinbankTest {
 		assertEquals(0, emptyDefault.get(10));
 		assertEquals(0, emptyDefault.get(25));
 	}
-	
 
 	@Test // inserting nickel should return true & one nickel should be in bank
 	public void testInsertNickel_return()

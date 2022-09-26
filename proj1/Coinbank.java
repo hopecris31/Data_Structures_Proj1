@@ -12,8 +12,7 @@ public class Coinbank {
 	public static final int NICKEL_VALUE = 5;
 	public static final int DIME_VALUE = 10;
 	public static final int QUARTER_VALUE = 25;
-	
-	// give meaningful names to holder array indices
+
 	private final int PENNY_INDEX = 0;
 	private final int NICKEL_INDEX = 1;
 	private final int DIME_INDEX = 2;
@@ -46,18 +45,13 @@ public class Coinbank {
 	 * @return the index of the coin type in the holder
 	 */
 	private int getCoinIndex(int coinType){
-		switch (coinType) {
-			case PENNY_VALUE:
-				return PENNY_INDEX;
-			case NICKEL_VALUE:
-				return NICKEL_INDEX;
-			case DIME_VALUE:
-				return DIME_INDEX;
-			case QUARTER_VALUE:
-				return QUARTER_INDEX;
-			default:
-				return -1;
-		}
+		return switch (coinType) {
+			case PENNY_VALUE -> PENNY_INDEX;
+			case NICKEL_VALUE -> NICKEL_INDEX;
+			case DIME_VALUE -> DIME_INDEX;
+			case QUARTER_VALUE -> QUARTER_INDEX;
+			default -> -1;
+		};
 	}
 
 	/**
@@ -68,10 +62,7 @@ public class Coinbank {
 	private void set(int coinType, int numCoins) {
 		if (isBankable(coinType))
 			switch (coinType) {
-				case PENNY_VALUE: case NICKEL_VALUE:
-				case DIME_VALUE: case QUARTER_VALUE:
-					this.holder[getCoinIndex(coinType)] = numCoins;
-					break;
+				case PENNY_VALUE, NICKEL_VALUE, DIME_VALUE, QUARTER_VALUE -> this.holder[getCoinIndex(coinType)] = numCoins;
 			}
 	}
 	
@@ -81,13 +72,10 @@ public class Coinbank {
 	 * @return true if bank can hold this coin, else false
 	 */
 	private boolean isBankable(int coin){  // please ask how this works
-		switch (coin) {
-		case PENNY_VALUE: case NICKEL_VALUE:
-		case DIME_VALUE: case QUARTER_VALUE:
-			return true;
-		default:
-			return false;
-		}
+		return switch (coin) {
+			case PENNY_VALUE, NICKEL_VALUE, DIME_VALUE, QUARTER_VALUE -> true;
+			default -> false;
+		};
 	}
 	
 	/** 

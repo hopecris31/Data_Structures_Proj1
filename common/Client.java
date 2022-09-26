@@ -8,7 +8,7 @@ public class Client {
 	public static void main(String[] args) {
 		Coinbank bank = new Coinbank();
 		
-		// insert 10 random coins into the bank and print it
+		// inserts 10 random coins into the bank and print it
 		for (int i=0; i<10; i++) {
 			bank.insert(getRandomCoin());
 		}
