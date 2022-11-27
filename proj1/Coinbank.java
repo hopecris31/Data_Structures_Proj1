@@ -7,7 +7,6 @@ package proj1;
  * roll and fall into the hole in which the size of the coin would permit.  This would
  * result with each coin in a sorted stack with its own type.
  *
- *
  * @author Hope Crisafi
  * @version Revision: 11/21/2022
  */

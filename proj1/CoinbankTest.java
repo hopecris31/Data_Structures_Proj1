@@ -13,7 +13,7 @@ import proj1.Coinbank;
 
 public class CoinbankTest {
 
-	@Rule // a test will fail if it takes longer than 1/10 of a second to run
+	@Rule
 	public Timeout timeout = Timeout.millis(100);
 
 
